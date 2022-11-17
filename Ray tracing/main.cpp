@@ -9,18 +9,18 @@ int main()
 	RenderWindow window(VideoMode(1024, 512), "Ray Tracing");
 	window.setFramerateLimit(60);
 
-	//VertexArray bebra(PrimitiveType::LineStrip, 3);
-
-	//bebra[0] = Vertex(Vector2f(500, 500));
-	//bebra[1] = Vertex(Vector2f(800, 500));
-	//bebra[2] = Vertex(Vector2f(100, 700));
-	
-
 	Player a(Vector2f(100,200));
+	float time;
+	Clock cl;
 	while (window.isOpen())
 	{
 		
-		a.update();
+		Mouse::setPosition(Vector2i(512, 512));
+		time = cl.getElapsedTime().asMicroseconds();
+		cl.restart();
+		time = time / 800;
+		
+		
 		
 
 		std::cout << "X: " << Mouse::getPosition(window).x << " Y: " << Mouse::getPosition(window).y << std::endl;
@@ -28,15 +28,21 @@ int main()
 		while (window.pollEvent(event))
 		{
 			
+			if (Event::MouseMoved)
+			{
+				if (Mouse::getPosition().x > 512) a.rotatePlayer(time*0.1);
+				if (Mouse::getPosition().x < 512) a.rotatePlayer(-0.1*time);
+			}
+
 			if (event.type == Event::Closed)
-				
 				window.close();
 		}
 
 		window.clear();
+		a.update(time, window);
 		drawMap(window);
 		a.draw(window);
-		a.drawRays3D();
+		a.drawRays3D(window);
 		window.display();
 	}
 
