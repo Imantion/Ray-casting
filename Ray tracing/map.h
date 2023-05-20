@@ -23,13 +23,13 @@ void drawMap(sf::RenderWindow& window)
 			mapBlock.setPosition(sf::Vector2f(x * 64, y * 64));
 			if (map[y * mapX + x] == 1)
 			{
-				mapBlock.setFillColor(sf::Color(50,50,50));
+				mapBlock.setFillColor(sf::Color(50, 50, 50));
 			}
 			else
 			{
 				mapBlock.setFillColor(sf::Color::White);
 			}
-			
+
 			window.draw(mapBlock);
 		}
 	}
