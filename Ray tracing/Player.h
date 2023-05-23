@@ -268,9 +268,11 @@ public:
 
 		if (Keyboard::isKeyPressed(Keyboard::W))
 		{
-			if (map[ipy * mapX + ipx_add] == 0) this->pos.x += cs;
+			if (map[ipy * mapX + ipx_add] == 0 && !checkCollision(ipx_add, ipy))
+				this->pos.x += cs;
 
-			if (map[ipy_add * mapX + ipx] == 0) this->pos.y -= sn;
+			if (map[ipy_add * mapX + ipx] == 0 && !checkCollision(ipx, ipy_add))
+				this->pos.y -= sn;
 
 		}
 		if (Keyboard::isKeyPressed(Keyboard::A))
@@ -281,16 +283,19 @@ public:
 			ipx = pos.x / 64, ipx_sub = (pos.x - xo) / 64, ipx_add = (pos.x + xo) / 64;
 			ipy = pos.y / 64, ipy_sub = (pos.y - yo) / 64, ipy_add = (pos.y + yo) / 64;
 
-			if (map[ipy * mapX + ipx_add] == 0) this->pos.x += sn;
-			if (map[ipy_add * mapX + ipx] == 0)this->pos.y += cs;
+			if (map[ipy * mapX + ipx_add] == 0 && !checkCollision(ipx_add, ipy))
+				this->pos.x += sn;
+			if (map[ipy_add * mapX + ipx] == 0 && !checkCollision(ipx, ipy_add))
+				this->pos.y += cs;
 
 		}
 		if (Keyboard::isKeyPressed(Keyboard::S))
 		{
 
-			if (map[ipy * mapX + ipx_sub] == 0) this->pos.x -= cs;
-			if (map[ipy_sub * mapX + ipx] == 0)this->pos.y += sn;
-
+			if (map[ipy * mapX + ipx_sub] == 0 && !checkCollision(ipx_sub, ipy))
+				this->pos.x -= cs;
+			if (map[ipy_sub * mapX + ipx] == 0 && !checkCollision(ipx, ipy_sub))
+				this->pos.y += sn;
 
 
 		}
@@ -302,8 +307,10 @@ public:
 			ipx = pos.x / 64, ipx_sub = (pos.x - xo) / 64, ipx_add = (pos.x + xo) / 64;
 			ipy = pos.y / 64, ipy_sub = (pos.y - yo) / 64, ipy_add = (pos.y + yo) / 64;
 
-			if (map[ipy * mapX + ipx_add] == 0) this->pos.x -= sn;
-			if (map[ipy_add * mapX + ipx] == 0) this->pos.y -= cs;
+			if (map[ipy * mapX + ipx_add] == 0 && !checkCollision(ipx_add, ipy))
+				this->pos.x -= sn;
+			if (map[ipy_add * mapX + ipx] == 0 && !checkCollision(ipx, ipy_add))
+				this->pos.y -= cs;
 
 		}
 
@@ -319,14 +326,8 @@ public:
 	}
 
 
-	void collision()
+	bool checkCollision(int x, int y)
 	{
-		for (size_t y = 0; y < 8; y++)
-		{
-			for (size_t x = 0; x < 8; x++)
-			{
-				/*if(player.getTextureRect().contains)*/
-			}
-		}
+		return map[y * mapX + x] == 1;
 	}
 };
