@@ -1,4 +1,4 @@
-# Ray-tracing
-My first ray-tracing engine
+# Ray-Casting
+My first ray-casting engine
 Created on SFML library
 Will upgrade it
